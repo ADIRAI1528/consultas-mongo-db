@@ -21,13 +21,13 @@ public class Inmueble {
     public string NombreAgente { get; set; } = string.Empty;
     [BsonElement("baños")]
 
-    public string Banios { get; set; } = string.Empty;
+    public int Banios { get; set; } 
     [BsonElement("metros_terreno")]
 
-    public string MetrosTerreno { get; set; } = string.Empty;
+    public int MetrosTerreno { get; set; } 
     [BsonElement("metros_construccion")]
 
-    public string MetrosConstruccion { get; set; } = string.Empty;
+    public int MetrosConstruccion { get; set; } 
     [BsonElement("tiene_patio")]
 
     public bool TienePatio { get; set; }
@@ -39,7 +39,7 @@ public class Inmueble {
     public string Agencia { get; set; } = string.Empty;
     [BsonElement("fecha_publicacion")]
 
-    public string FechaPublicidad { get; set; } = string.Empty;
+    public string FechaPublicacion { get; set; } = string.Empty;
     [BsonElement("costo")]
 
     public int Costo { get; set; }

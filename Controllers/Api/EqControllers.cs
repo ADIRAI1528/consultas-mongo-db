@@ -20,10 +20,10 @@ public class EqController : Controller {
 
     return Ok (lista);
     }
-   }
+   
 
 
-public class EqController : Controller {
+
    [HttpGet("listar-baños")]
 
    public IActionResult ListarBaños(){
@@ -33,16 +33,16 @@ public class EqController : Controller {
     var db = client.GetDatabase("Inmuebles");
     var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-    var filtro = Builders<Inmueble>.Filter.Eq(x => x.Baños, 0);
+    var filtro = Builders<Inmueble>.Filter.Eq(x => x.Banios, 0);
     var lista = collection.Find(filtro).ToList();
 
     return Ok (lista);
     }
-   }
+   
 
 
 
-public class EqController : Controller {
+
    [HttpGet("nombre-agente")]
 
    public IActionResult NombreAgente(){
@@ -57,12 +57,12 @@ public class EqController : Controller {
 
     return Ok (lista);
     }
-   }
+   
 
 
 
 
-public class EqController : Controller {
+
    [HttpGet("listar-tipo")]
 
    public IActionResult ListarTipo(){
@@ -77,25 +77,9 @@ public class EqController : Controller {
 
     return Ok (lista);
     }
-   }
+   
 
 
-
-
-public class EqController : Controller {
-   [HttpGet("listar-tipo")]
-
-   public IActionResult ListarTipo(){
-    // Muestra todos los registros cuyo tipo de inmueble sea "Terreno"
-
-    MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
-    var db = client.GetDatabase("Inmuebles");
-    var collection = db.GetCollection<Inmueble>("RentasVentas");
-
-    var filtro = Builders<Inmueble>.Filter.Eq(x => x.Tipo, "Terreno");
-    var lista = collection.Find(filtro).ToList();
-
-    return Ok (lista);
-    }
-   }
+  
+}
 
