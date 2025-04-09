@@ -24,7 +24,7 @@ public class GteController : Controller {
 
 
 
-   [HttpGet("listar-numero")]
+   [HttpGet("listar-baños")]
 
    public IActionResult ListarBaños(){
     // Muestra todos los registros donde el número de baños sea al menos 2.
@@ -74,5 +74,22 @@ public class GteController : Controller {
 
     return Ok (lista);
     }
+
+
+ [HttpGet("listar-metros")]
+
+   public IActionResult ListarMetros(){
+    // Muestra todos los registros donde el número de metros_terreno sea 4 o más.
+
+    MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
+    var db = client.GetDatabase("Inmuebles");
+    var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+    var filtro = Builders<Inmueble>.Filter.Gte(x => x.MetrosTerreno, 4);
+    var lista = collection.Find(filtro).ToList();
+
+    return Ok (lista);
+    }
+
 
 }

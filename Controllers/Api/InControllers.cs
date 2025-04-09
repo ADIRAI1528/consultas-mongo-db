@@ -8,19 +8,19 @@ using MongoDB.Driver;
 public class InController : Controller {
    [HttpGet("listar-operacion")]
 
-   public IActionResult ListarCosto(){
+   public IActionResult ListarOperacion(){
     // Muestra todos los registros donde la operación sea "Venta" o "Renta".
 
     MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
     var db = client.GetDatabase("Inmuebles");
     var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-    List<string> operaciones = new List<string>();
-    operaciones.Add("Renta");
+    List<string> operacion = new List<string>();
+    operacion.Add("Renta");
 
-    operaciones.Add("Venta");
+    operacion.Add("Venta");
 
-    var filtro = Builders<Inmueble>.Filter.In(x => x.Operacion, operaciones);
+    var filtro = Builders<Inmueble>.Filter.In(x => x.Operacion, operacion);
     var lista = collection.Find(filtro).ToList();
 
     return Ok (lista);
@@ -31,18 +31,18 @@ public class InController : Controller {
 
    [HttpGet("listar-tipo")]
 
-   public IActionResult ListarNumero(){
+   public IActionResult ListarTipo(){
     // Muestra todos los registros cuyo tipo de inmueble sea "Casa" o  "Departamento".
     MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
     var db = client.GetDatabase("Inmuebles");
     var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-      List<string> operaciones = new List<string>();
+      List<string> tipo = new List<string>();
     tipo.Add("Casa");
 
     tipo.Add("Departamento");
 
-    var filtro = Builders<Inmueble>.Filter.In(x => x.tipo,Tipo);
+    var filtro = Builders<Inmueble>.Filter.In(x => x.Tipo, tipo);
     var lista = collection.Find(filtro).ToList();
 
     return Ok (lista);
@@ -52,21 +52,21 @@ public class InController : Controller {
 
 
 
-   [HttpGet("listar-agencia")]
+   [HttpGet("listar-registros-tipo")]
 
-   public IActionResult ListarAgencia(){
+   public IActionResult ListarRegistrosTipo(){
     // Muestra todos los registros con un baño de propiedad en Terreno y Casa
 
     MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
     var db = client.GetDatabase("Inmuebles");
     var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-       List<string> operaciones = new List<string>();
-    agencia.Add("Terreno");
+       List<string> tipo = new List<string>();
+    tipo.Add("Terreno");
 
-    agencia.Add("Casa");
+    tipo.Add("Casa");
 
-    var filtro = Builders<Inmueble>.Filter.In(x => x.agencia, Agencia);
+    var filtro = Builders<Inmueble>.Filter.In(x => x.Tipo, tipo);
     var lista = collection.Find(filtro).ToList();
 
     return Ok (lista);
@@ -83,16 +83,38 @@ public class InController : Controller {
     var db = client.GetDatabase("Inmuebles");
     var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-     List<string> operaciones = new List<string>();
-    baños.Add( 2 );
+     List<int> banios = new List<int>();
+    banios.Add( 2 );
 
-    baños.Add( 3 );
+    banios.Add( 3 );
 
 
-    var filtro = Builders<Inmueble>.Filter.In(x => x.baños,Baños);
+    var filtro = Builders<Inmueble>.Filter.In(x => x.Banios, banios);
     var lista = collection.Find(filtro).ToList();
 
     return Ok (lista);
     }
+
+
+ [HttpGet("listar-numero-pisos")]
+
+   public IActionResult ListarNumeroPisos(){
+    // Muestra todos los registros donde el número de pisos sea 1, 2 o 3.
+
+    MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
+    var db = client.GetDatabase("Inmuebles");
+    var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+    List<int> numero = new List<int>();
+    numero.Add(1);
+
+    numero.Add(2);
+
+    var filtro = Builders<Inmueble>.Filter.In(x => x.Pisos, numero);
+    var lista = collection.Find(filtro).ToList();
+
+    return Ok (lista);
+    }
+   
 
 }

@@ -33,7 +33,7 @@ public class GtController : Controller {
     var db = client.GetDatabase("Inmuebles");
     var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-    var filtro = Builders<Inmueble>.Filter.Gt(x => x.Pisos, 3);
+    var filtro = Builders<Inmueble>.Filter.Gt(x => x.Pisos, 2);
     var lista = collection.Find(filtro).ToList();
 
     return Ok (lista);
@@ -62,7 +62,7 @@ public class GtController : Controller {
     
     [HttpGet("listar-baños")]
 
-   public IActionResult ListarBañosbaños(){
+   public IActionResult ListarBaños(){
     // Muestra todos los registros donde el número de baños sea mayor a 2.
 
     MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
@@ -74,5 +74,25 @@ public class GtController : Controller {
 
     return Ok (lista);
     }
+
+
+ [HttpGet("listar-numero-mayor")]
+
+   public IActionResult ListarNumeroMayor(){
+    // Muestra todos los registros de costo.
+
+    MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
+    var db = client.GetDatabase("Inmuebles");
+    var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+    var filtro = Builders<Inmueble>.Filter.Gt(x => x.Costo, 11514);
+    var lista = collection.Find(filtro).ToList();
+
+    return Ok (lista);
+    }
+
+
+
+
 
 }

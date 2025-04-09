@@ -42,16 +42,16 @@ public class LtController : Controller {
 
 
 
-   [HttpGet("fecha_publicacion")]
+   [HttpGet("registros-fecha-publicacion")]
 
-   public IActionResult FechaPublicacion(){
+   public IActionResult RegistrosFechaPublicacion(){
     // Muestra todos los registros donde la fecha publicacion sea menor a 2 años.
 
     MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
     var db = client.GetDatabase("Inmuebles");
     var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-    var filtro = Builders<Inmueble>.Filter.Lt(x => x.fechapublicacion, 2 );
+    var filtro = Builders<Inmueble>.Filter.Lt(x => x.FechaPublicacion, "2025-01-30");
     var lista = collection.Find(filtro).ToList();
 
     return Ok (lista);
@@ -68,10 +68,24 @@ public class LtController : Controller {
     var db = client.GetDatabase("Inmuebles");
     var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-    var filtro = Builders<Inmueble>.Filter.Lt(x => x.metrosterreno, 250);
+    var filtro = Builders<Inmueble>.Filter.Lt(x => x.MetrosTerreno, 250);
     var lista = collection.Find(filtro).ToList();
 
     return Ok (lista);
     }
 
+[HttpGet("listar-registros-construccion")]
+
+   public IActionResult ListarRegistrosContruccion(){
+    //Muestra todos los registros donde metros construccion sea menor a 230 metros.
+
+    MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
+    var db = client.GetDatabase("Inmuebles");
+    var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+    var filtro = Builders<Inmueble>.Filter.Lt(x => x.MetrosConstruccion, 230);
+    var lista = collection.Find(filtro).ToList();
+
+    return Ok (lista);
+    }
 }
