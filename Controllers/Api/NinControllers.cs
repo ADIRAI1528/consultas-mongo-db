@@ -9,7 +9,7 @@ public class NinController : Controller {
    [HttpGet("listar-costo")]
 
    public IActionResult ListarCosto(){
-    // Muestra todos los registros cuyo costo no esté en 500000, 750000, 1000000
+    // 00Muestra todos los registros cuyo costo no esté en 500000, 750000, 10000
 
     MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
     var db = client.GetDatabase("Inmuebles");
